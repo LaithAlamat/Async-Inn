@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace Async_Inn.Models.Interfaces
 {
-    interface IRoom
+    public interface IRoom
     {
         Task<Room> Create(Room rooms);
         Task<List<Room>> GetRooms();
         Task<Room> GetRoom(int id);
         Task<Room> UpdateRoom(int id, Room rooms);
         Task Delete(int id);
+
+        Task AddAmenityToRoom(int roomId, int amenityId);
+        Task RemoveAmentityFromRoom(int roomId, int amenityId);
     }
 }
 

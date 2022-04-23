@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Async_Inn.Models.RoomAmenity;
 
 namespace Async_Inn.Data
 {
@@ -12,6 +13,9 @@ namespace Async_Inn.Data
             public DbSet<Hotel> Hotels { get; set; }
             public DbSet<Room> Rooms { get; set; }
             public DbSet<Amenity> Amenities { get; set; }
+
+            public DbSet<HotelRoom> HotelRoom { get; set; }
+            public DbSet<RoomAmenity> RoomsAmenities { get; set; }
         public AsyncInnDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -43,7 +47,11 @@ namespace Async_Inn.Data
              new Amenity { ID = 31, Name = "Mini Bar"}
 
            );
+            modelBuilder.Entity<RoomAmenity>()
+                .HasKey(RoomAmenity => new { RoomAmenity.RoomID, RoomAmenity.AmenitiesID });
 
+            modelBuilder.Entity<HotelRoom>()
+                        .HasKey(HotelRoomNumber => new { HotelRoomNumber.HotelID, HotelRoomNumber.RoomNumber });
         }
     }
 }

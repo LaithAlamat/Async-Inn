@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Async_Inn.Models.Interfaces
 {
-    interface IAmenity
+    public interface IAmenity
     {
         Task<Amenity> Create(Amenity amenities);
         Task<List<Amenity>> GetAmenities();
-        Task<Amenity> GetAmenitie(int id);
+        Task<Amenity> GetAmenity(int id);
         Task<Amenity> UpdateAmenities(int id, Amenity amenities);
         Task Delete(int id);
     }

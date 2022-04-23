@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Async_Inn.Models.Interfaces
 {
-    interface IHotel
+    public interface IHotel
     {
         Task<Hotel> Create(Hotel Hotels);
         Task<List<Hotel>> GetHotels();

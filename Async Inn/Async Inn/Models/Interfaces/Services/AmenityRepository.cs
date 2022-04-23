@@ -25,7 +25,7 @@ namespace Async_Inn.Models.Interfaces.Services
 
         public async Task Delete(int id)
         {
-            Amenity amenities = await GetAmenitie(id);
+            Amenity amenities = await GetAmenity(id);
             if (amenities != null)
             {
                 _context.Entry(amenities).State = EntityState.Deleted;
@@ -34,18 +34,18 @@ namespace Async_Inn.Models.Interfaces.Services
             }
         }
 
-        public async Task<Amenity> GetAmenitie(int id)
+        public async Task<Amenity> GetAmenity(int id)
         {
-            Amenity amenities = await _context.Amenities.FindAsync(id);
-
-            return amenities;
+            return await _context.Amenities.Include(x => x.RoomAmenity)
+                                         .ThenInclude(x => x.Room)
+                                         .FirstOrDefaultAsync(x => x.ID == id);
         }
 
         public async Task<List<Amenity>> GetAmenities()
         {
-            var amenities = await _context.Amenities.ToListAsync();
-
-            return amenities;
+            return await _context.Amenities.Include(x => x.RoomAmenity)
+                                       .ThenInclude(x => x.Room)
+                                       .ToListAsync();
         }
 
         public async Task<Amenity> UpdateAmenities(int id, Amenity amenities)

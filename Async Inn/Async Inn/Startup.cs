@@ -1,4 +1,7 @@
 using Async_Inn.Data;
+using Async_Inn.Models.Interface;
+using Async_Inn.Models.Interfaces;
+using Async_Inn.Models.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +33,13 @@ namespace Async_Inn
                 options.UseSqlServer(connectionString);
             });
             services.AddControllers();
+            services.AddTransient<IHotel, HotelRepository>();
+            services.AddTransient<IRoom, RoomRepository>();
+            services.AddTransient<IAmenity, AmenityRepository>();
+            services.AddTransient<IHotelRoom, HotelRoomRepository>();
+            services.AddControllers().AddNewtonsoftJson(options =>
+               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+           );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

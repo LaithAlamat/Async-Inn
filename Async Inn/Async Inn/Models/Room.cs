@@ -15,6 +15,9 @@ namespace Async_Inn.Models
         public string Name { get; set; }
         [Required]
         public int Layout { get; set; }
-        
+
+        public List<RoomAmenity> RoomAmenity { get; set; }
+        public List<HotelRoom> HotelRoom { get; set; }
+
     }
 }

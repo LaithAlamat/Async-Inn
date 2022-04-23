@@ -24,5 +24,7 @@ namespace Async_Inn.Models
 
         public string PhoneNumber { get; set; }
 
+        public List<HotelRoom> HotelRoom { get; set; }
+
     }
 }
