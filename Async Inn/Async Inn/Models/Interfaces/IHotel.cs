@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Async_Inn.Models.API_s;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +8,10 @@ namespace Async_Inn.Models.Interfaces
 {
     public interface IHotel
     {
-        Task<Hotel> Create(Hotel Hotels);
-        Task<List<Hotel>> GetHotels();
-        Task<Hotel> GetHotel(int id);
-        Task<Hotel> UpdateHotel(int id, Hotel hotelBranches);
+        Task<HotelDTO> Create(HotelDTO hotel);
+        Task<List<HotelDTO>> GetHotels();
+        Task<HotelDTO> GetHotel(int id);
+        Task<HotelDTO> UpdateHotel(int id, HotelDTO hotel);
         Task Delete(int id);
     }
 }

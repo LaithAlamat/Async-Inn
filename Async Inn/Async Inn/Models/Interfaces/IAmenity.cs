@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Async_Inn.Models.API_s;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +8,10 @@ namespace Async_Inn.Models.Interfaces
 {
     public interface IAmenity
     {
-        Task<Amenity> Create(Amenity amenities);
-        Task<List<Amenity>> GetAmenities();
-        Task<Amenity> GetAmenity(int id);
-        Task<Amenity> UpdateAmenities(int id, Amenity amenities);
+        Task<AmenityDTO> Create(AmenityDTO amenity);
+        Task<List<AmenityDTO>> GetAmenities();
+        Task<AmenityDTO> GetAmenity(int id);
+        Task<AmenityDTO> UpdateAmenity(int id, AmenityDTO amenity);
         Task Delete(int id);
     }
 }
