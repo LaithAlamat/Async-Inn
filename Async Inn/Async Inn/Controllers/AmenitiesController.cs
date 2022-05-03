@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Async_Inn.Data;
-using Async_Inn.Models;
-using Async_Inn.Models.Interfaces;
+using AsyncInn.Models;
+using AsyncInn.Models.Interfaces;
 
-namespace Async_Inn.Controllers
+namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -26,20 +25,16 @@ namespace Async_Inn.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
         {
-            var list = await _amenity.GetAmenities();
-            return Ok(list);
+            var amenities = await _amenity.GetAmenities();
+            return Ok(amenities);
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Amenity>> GetAmenity(int id)
         {
-            var amenity = await _amenity.GetAmenity(id);
-            if (amenity == null)
-            {
-                return NotFound();
-            }
-            return amenity;
+            Amenity amenity = await _amenity.GetAmenity(id);
+            return Ok(amenity);
         }
 
         // PUT: api/Amenities/5
@@ -51,8 +46,8 @@ namespace Async_Inn.Controllers
             {
                 return BadRequest();
             }
-            var updateAmenity = await _amenity.UpdateAmenities(id, amenity);
-            return Ok(updateAmenity);
+            var modifiedAmenity = await _amenity.UpdateAmenity(id, amenity);
+            return Ok(modifiedAmenity);
         }
 
         // POST: api/Amenities
@@ -61,7 +56,6 @@ namespace Async_Inn.Controllers
         public async Task<ActionResult<Amenity>> PostAmenity(Amenity amenity)
         {
             Amenity newAmenity = await _amenity.Create(amenity);
-
             return Ok(newAmenity);
         }
 

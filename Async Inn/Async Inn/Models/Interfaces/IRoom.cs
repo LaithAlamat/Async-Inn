@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Async_Inn.Models.Interfaces
+namespace AsyncInn.Models.Interfaces
 {
     public interface IRoom
     {
-        Task<Room> Create(Room rooms);
         Task<List<Room>> GetRooms();
         Task<Room> GetRoom(int id);
-        Task<Room> UpdateRoom(int id, Room rooms);
+        Task<Room> Create(Room room);
         Task Delete(int id);
+        Task<Room> UpdateRoom(int id, Room room);
 
         Task AddAmenityToRoom(int roomId, int amenityId);
         Task RemoveAmentityFromRoom(int roomId, int amenityId);
     }
 }
-

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Async_Inn.Models.Interface
+namespace AsyncInn.Models.Interfaces
 {
     public interface IHotelRoom
     {
-        
-        Task<HotelRoom> Create(HotelRoom hotelRoomoom);
-        
-        Task<List<HotelRoom>> GetHotelRooms();
-        
-        Task<HotelRoom> GetHotelRoom(int hotelId, int roomNumber);
-        
-        Task<HotelRoom> Update(int hotelId, int roomNumber, HotelRoom hotelRoom);
-        
-        Task Delete(int hotelId, int roomNumber);
+
+        Task<Hotel> GetHotelRooms(int hotelId);
+
+        Task<HotelRoom> AddRoomToHotel(int hotelId, int roomId);
+
+        Task<Room> RoomDetails(int hotelId, int roomId);
+
+        Task<Room> UpdateRoomDetails(int hotelId, int roomId, Room room);
+
+        Task DeleteRoomFromHotel(int hotelId, int roomId);
     }
 }

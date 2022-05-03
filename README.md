@@ -39,3 +39,15 @@ The relation between the Room Amenities and the Amenities is Many-One since many
 - ### Amenities
 
 The Amenities has and ID and Name as a primary key because each one must be unique than the other
+
+## Tuesday 3/5/2022
+For today, Lab14 was done and we did tha navigation properties of the project and the routing 
+
+we added the capability of adding and deleting an amenity to and from a room in the room controller
+
+POST: api/Rooms/{roomId}/{amenityId}
+DELETE: api/Rooms/{roomId}/{amenityId}
+
+We also added the ability to add a room to a hotel or delete a room from a hotel
+DELETE: api/HotelRooms/{hotelId}/Rooms/{roomNumber}
+PUT: api/HotelRooms/{hotelId}/Rooms/{roomNumber}

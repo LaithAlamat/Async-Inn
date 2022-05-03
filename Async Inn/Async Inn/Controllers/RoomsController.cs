@@ -5,29 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Async_Inn.Data;
-using Async_Inn.Models;
-using Async_Inn.Models.Interfaces;
+using AsyncInn.Models;
+using AsyncInn.Models.Interfaces;
 
-namespace Async_Inn.Controllers
+namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class RoomsController : ControllerBase
     {
-
         private readonly IRoom _room;
 
         public RoomsController(IRoom room)
         {
             _room = room;
         }
+
         // GET: api/Rooms
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
-            var list = await _room.GetRooms();
-            return Ok(list);
+            return await _room.GetRooms();
         }
 
         // GET: api/Rooms/5
@@ -35,11 +33,7 @@ namespace Async_Inn.Controllers
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
             var room = await _room.GetRoom(id);
-            if (room == null)
-            {
-                return NotFound();
-            }
-            return room;
+            return Ok(room);
         }
 
         // PUT: api/Rooms/5
@@ -51,13 +45,13 @@ namespace Async_Inn.Controllers
             {
                 return BadRequest();
             }
-
-            var updateRoom = await _room.UpdateRoom(id, room);
-            return Ok(updateRoom);
+            var modifiedRoom = await _room.UpdateRoom(id, room);
+            return Ok(modifiedRoom);
         }
 
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
         public async Task<ActionResult<Room>> PostRoom(Room room)
         {
             Room newRoom = await _room.Create(room);
@@ -72,23 +66,21 @@ namespace Async_Inn.Controllers
             return NoContent();
         }
 
-
-        [HttpPost]
-        [Route("{roomId}/Amenity/{amenityId}")]
-        public async Task<IActionResult> AddRoomAmenity(int roomId, int amenityId)
+        // POST: api/Rooms/id/Amenity/id
+        [HttpPost("{roomId}/Amenity/{amenityId}")]
+        public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
         {
             await _room.AddAmenityToRoom(roomId, amenityId);
             return NoContent();
         }
 
-
-        [HttpDelete("{id}")]
-        [Route("{roomId}/{amenityId}")]
-        public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
+        // POST: api/Rooms/id/Amenity/id
+        [HttpDelete("{roomId}/Amenity/{amenityId}")]
+        public async Task<IActionResult> RemoveAmentityFromRoom(int roomId, int amenityId)
         {
             await _room.RemoveAmentityFromRoom(roomId, amenityId);
             return NoContent();
         }
-    }
 
+    }
 }

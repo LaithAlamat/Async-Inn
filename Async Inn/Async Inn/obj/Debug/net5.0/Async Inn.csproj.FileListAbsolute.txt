@@ -142,3 +142,6 @@ C:\Users\laith alamat\source\repos\Async Inn\Async Inn\obj\Debug\net5.0\Razor\Vi
 C:\Users\laith alamat\source\repos\Async Inn\Async Inn\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\laith alamat\source\repos\Async Inn\Async Inn\obj\Debug\net5.0\Async Inn.RazorTargetAssemblyInfo.cs
 C:\Users\laith alamat\source\repos\Async Inn\Async Inn\obj\Debug\net5.0\Async Inn.Views.pdb
+C:\Users\laith alamat\source\repos\Async Inn\Async Inn\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\laith alamat\source\repos\Async Inn\Async Inn\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\laith alamat\source\repos\Async Inn\Async Inn\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
