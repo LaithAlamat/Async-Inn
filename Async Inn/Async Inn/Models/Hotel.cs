@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Async_Inn.Models
+namespace AsyncInn.Models
 {
     public class Hotel
     {
@@ -15,6 +14,7 @@ namespace Async_Inn.Models
         public string State { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
-        public List<HotelRoom> HotelRoom { get; set; }
+        public List<HotelRoom> HotelRooms { get; set; }
+
     }
 }

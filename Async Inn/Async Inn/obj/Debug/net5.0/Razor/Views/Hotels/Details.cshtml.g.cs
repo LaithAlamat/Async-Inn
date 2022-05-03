@@ -14,7 +14,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f712bd9b866bd8a93549fbf1bc43b7eb4a674fb", @"/Views/Hotels/Details.cshtml")]
     #nullable restore
-    public class Views_Hotels_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Async_Inn.Models.Hotel>
+    public class Views_Hotels_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<AsyncInn.Models.Hotel>
     #nullable disable
     {
         #pragma warning disable 1998
@@ -156,7 +156,7 @@ WriteAttributeValue("", 1470, Model.ID, 1470, 9, false);
         #nullable disable
         #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<Async_Inn.Models.Hotel> Html { get; private set; } = default!;
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<AsyncInn.Models.Hotel> Html { get; private set; } = default!;
         #nullable disable
     }
 }

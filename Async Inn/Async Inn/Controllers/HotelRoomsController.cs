@@ -5,72 +5,59 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Async_Inn.Data;
-using Async_Inn.Models;
-using Async_Inn.Models.Interfaces;
-using Async_Inn.Models.API_s;
+using AsyncInn.Models;
+using AsyncInn.Models.Interfaces;
+using AsyncInn.Models.DTOs;
 
-namespace Async_Inn.Controllers
+namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class HotelRoomsController : ControllerBase
     {
-        private readonly IHotelRoom _hotelRoom;
+        private readonly IHotelRoom _HotelRoom;
 
         public HotelRoomsController(IHotelRoom hotelRoom)
         {
-            _hotelRoom = hotelRoom;
+            _HotelRoom = hotelRoom;
         }
 
-        // GET: api/HotelRooms
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRoom()
+        // GET: api/HotelRooms/1/Rooms/1
+        [HttpGet("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<ActionResult<HotelRoomDTO>> GetRoomDetails(int hotelId, int roomNumber)
         {
-            return Ok(await _hotelRoom.GetHotelRooms());
+            var room = await _HotelRoom.RoomDetails(hotelId, roomNumber);
+            return Ok(room);
         }
 
-        // GET: api/HotelRooms/5
-        [HttpGet("{roomNumber}")]
-        public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int hotelID, int roomNumber)
+        // GET: api/HotelRooms/1
+        [HttpGet("{hotelId}")]
+        public async Task<ActionResult<Hotel>> GetHotelRooms(int hotelId)
         {
-            var hotelRoom = await _hotelRoom.GetHotelRoom(hotelID, roomNumber);
-            if (hotelRoom == null)
-            {
-                return NotFound();
-            }
+            var hotelRooms = await _HotelRoom.GetHotelRooms(hotelId);
+            return Ok(hotelRooms);
+        }
+        // PUT: api/HotelRooms/hotelId/Rooms/roomNumber
+        [HttpPut("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<ActionResult<HotelRoomDTO>> PutHotelRoom(int hotelId, int roomNumber, HotelRoomDTO hotelRoom)
+        {
+            var newRoom = await _HotelRoom.UpdateRoomDetails(hotelId, roomNumber, hotelRoom);
+            return Ok(newRoom);
+        }
+        // I added more details so that I can add the number of my room with it's other details.
+        // POST: api/HotelRooms/3/1/1
+        [HttpPost("{hotelId}/Rooms")]
+        public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelId, HotelRoomDTO room)
+        {
+            var hotelRoom = await _HotelRoom.AddRoomToHotel(hotelId, room);
             return Ok(hotelRoom);
         }
 
-        // PUT: api/HotelRooms/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{roomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(int hotelID, int roomNumber, HotelRoomDTO hotelRoom)
+        // DELETE: api/HotelRooms/1/1
+        [HttpDelete("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<IActionResult> DeleteHotelRoom(int hotelId, int roomNumber)
         {
-            if (hotelID != hotelRoom.HotelID && roomNumber != hotelRoom.RoomNumber)
-            {
-                return BadRequest();
-            }
-
-            var updateHotelRoom = await _hotelRoom.Update(hotelID, roomNumber, hotelRoom);
-            return Ok(updateHotelRoom);
-        }
-
-        // POST: api/HotelRooms
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<HotelRoomDTO>> PostHotelRoom(HotelRoomDTO hotelRoom)
-        {
-            var newHotelRoom = await _hotelRoom.Create(hotelRoom);
-
-            return Ok(newHotelRoom);
-        }
-
-        // DELETE: api/HotelRooms/5
-        [HttpDelete("{roomNumber}")]
-        public async Task<IActionResult> DeleteHotelRoom(int hotelID, int roomNumber)
-        {
-            await _hotelRoom.Delete(hotelID, roomNumber);
+            await _HotelRoom.DeleteRoomFromHotel(hotelId, roomNumber);
             return NoContent();
         }
     }

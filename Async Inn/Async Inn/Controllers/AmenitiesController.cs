@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Async_Inn.Data;
-using Async_Inn.Models;
-using Async_Inn.Models.Interfaces;
-using Async_Inn.Models.API_s;
+using AsyncInn.Models;
+using AsyncInn.Models.Interfaces;
+using AsyncInn.Models.DTOs;
 
-namespace Async_Inn.Controllers
+namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,42 +26,37 @@ namespace Async_Inn.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
-            var list = await _amenity.GetAmenities();
-            return Ok(list);
+            var amenities = await _amenity.GetAmenities();
+            return Ok(amenities);
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
-            var amenity = await _amenity.GetAmenity(id);
-            if (amenity == null)
-            {
-                return NotFound();
-            }
-            return amenity;
+            AmenityDTO amenity = await _amenity.GetAmenity(id);
+            return Ok(amenity);
         }
 
         // PUT: api/Amenities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAmenity(int id, AmenityDTO amenity)
+        public async Task<IActionResult> PutAmenity(int id, Amenity amenity)
         {
             if (id != amenity.ID)
             {
                 return BadRequest();
             }
-            var updateAmenity = await _amenity.UpdateAmenity(id, amenity);
-            return Ok(updateAmenity);
+            var modifiedAmenity = await _amenity.UpdateAmenity(id, amenity);
+            return Ok(modifiedAmenity);
         }
 
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AmenityDTO>> PostAmenity(AmenityDTO amenity)
+        public async Task<ActionResult<Amenity>> PostAmenity(AmenityDTO amenity)
         {
-            var newAmenity = await _amenity.Create(amenity);
-
+            Amenity newAmenity = await _amenity.Create(amenity);
             return Ok(newAmenity);
         }
 

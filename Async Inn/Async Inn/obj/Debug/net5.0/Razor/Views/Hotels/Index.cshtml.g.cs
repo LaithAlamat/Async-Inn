@@ -14,7 +14,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"47e7b30c0b38c43b3ce06c0631b1c974d245ba7c", @"/Views/Hotels/Index.cshtml")]
     #nullable restore
-    public class Views_Hotels_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Async_Inn.Models.Hotel>>
+    public class Views_Hotels_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<AsyncInn.Models.Hotel>>
     #nullable disable
     {
         #pragma warning disable 1998
@@ -192,7 +192,7 @@ WriteAttributeValue("", 1719, item.ID, 1719, 8, false);
         #nullable disable
         #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<IEnumerable<Async_Inn.Models.Hotel>> Html { get; private set; } = default!;
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<IEnumerable<AsyncInn.Models.Hotel>> Html { get; private set; } = default!;
         #nullable disable
     }
 }
