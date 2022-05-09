@@ -96,3 +96,19 @@ Lab16 was done and the DTOs were implemented in the project so they can change t
         public int ID { get; set; }
         public string Name { get; set; }
     }
+
+## Identity
+
+ASP.NET Core Identity:
+
+Is an API that supports user interface (UI) login functionality.
+Manages users, passwords, profile data, roles, claims, tokens, email confirmation, and more.
+Users can create an account with the login information stored in Identity or they can use an external login provider. Supported external login providers include Facebook, Google, Microsoft Account, and Twitter.
+
+Identity is typically configured using a SQL Server database to store user names, passwords, and profile data. Alternatively, another persistent store can be used, for example, Azure Table Storage.
+
+Register:
+The user sends a POST request with the registration data(Username, Password, Email, and PhoneNumber), then the program checks for any errors with the input data and if no errors found, it will return that register done, otherwise it will show the error.
+
+Login:
+The user sends a POST request with the Login data, then the program checks if there's a user with the Username and password sent, if yes, it will return oK and a message that Login is done, otherwise it will return that the user was not found or the password is wrong.

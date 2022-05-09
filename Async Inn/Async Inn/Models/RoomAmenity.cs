@@ -12,7 +12,6 @@ namespace AsyncInn.Models
         public int AmenityID { get; set; }
         [Required]
         public int RoomID { get; set; }
-
         public Amenity Amenity { get; set; }
         public Room Room { get; set; }
     }

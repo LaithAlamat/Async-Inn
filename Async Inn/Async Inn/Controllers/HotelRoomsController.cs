@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Models;
 using AsyncInn.Models.Interfaces;
+using AsyncInn.Models.DTOs;
 
 namespace AsyncInn.Controllers
 {
@@ -21,11 +22,11 @@ namespace AsyncInn.Controllers
             _HotelRoom = hotelRoom;
         }
 
-        // GET: api/HotelRooms/1/1
-        [HttpGet("{hotelId}/{roomId}")]
-        public async Task<IActionResult> GetRoomDetails(int hotelId, int roomId)
+        // GET: api/HotelRooms/1/Rooms/1
+        [HttpGet("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<ActionResult<HotelRoomDTO>> GetRoomDetails(int hotelId, int roomNumber)
         {
-            var room = await _HotelRoom.RoomDetails(hotelId, roomId);
+            var room = await _HotelRoom.RoomDetails(hotelId, roomNumber);
             return Ok(room);
         }
 
@@ -36,27 +37,26 @@ namespace AsyncInn.Controllers
             var hotelRooms = await _HotelRoom.GetHotelRooms(hotelId);
             return Ok(hotelRooms);
         }
-
-        [HttpPut("{hotelId}/{roomId}")]
-        public async Task<IActionResult> PutHotelRoom(int hotelId, int roomId, Room room)
+        // PUT: api/HotelRooms/hotelId/Rooms/roomNumber
+        [HttpPut("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<ActionResult<HotelRoomDTO>> PutHotelRoom(int hotelId, int roomNumber, HotelRoomDTO hotelRoom)
         {
-            var newRoom = await _HotelRoom.UpdateRoomDetails(hotelId, roomId, room);
+            var newRoom = await _HotelRoom.UpdateRoomDetails(hotelId, roomNumber, hotelRoom);
             return Ok(newRoom);
         }
-
-        // POST: api/HotelRooms/3/1
-        [HttpPost("{hotelId}/{roomId}")]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelId, int roomId)
+        // POST: api/HotelRooms/3/1/1
+        [HttpPost("{hotelId}/Rooms")]
+        public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelId, HotelRoomDTO room)
         {
-            var hotelRoom = await _HotelRoom.AddRoomToHotel(hotelId, roomId);
+            var hotelRoom = await _HotelRoom.AddRoomToHotel(hotelId, room);
             return Ok(hotelRoom);
         }
 
-        // DELETE: api/HotelRooms/1
-        [HttpDelete("{hotelId}/{roomId}")]
-        public async Task<IActionResult> DeleteHotelRoom(int hotelId, int roomId)
+        // DELETE: api/HotelRooms/1/1
+        [HttpDelete("{hotelId}/Rooms/{roomNumber}")]
+        public async Task<IActionResult> DeleteHotelRoom(int hotelId, int roomNumber)
         {
-            await _HotelRoom.DeleteRoomFromHotel(hotelId, roomId);
+            await _HotelRoom.DeleteRoomFromHotel(hotelId, roomNumber);
             return NoContent();
         }
     }
